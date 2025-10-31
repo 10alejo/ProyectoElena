@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alejandro — AllGim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #10131a;
+      font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a.back {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 60;
+      background: rgba(17,17,18,0.92);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    a.back:hover { background: #3356ff; }
+
+    /* === SECCIÓN SUPERIOR === */
+    .top-section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(135deg, #1d2230, #2a2f42, #181c24);
+      background-size: 200% 200%;
+      animation: gradientMove 10s ease infinite;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: transform 0.4s ease;
+    }
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+    }
+
+    .profile-info {
+      margin-top: 25px;
+      background: rgba(255,255,255,0.05);
+      padding: 25px 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+    .profile-info:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-5px);
+    }
+
+    .profile-info h2 {
+      margin-top: 0;
+      font-size: 2em;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    .profile-info p {
+      margin: 6px 0;
+      font-size: 1.05em;
+    }
+
+    /* === CAJAS INFORMATIVAS === */
+    .box-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 50px;
+      width: 90%;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+      transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .info-box:hover {
+      transform: translateY(-6px);
+      border: 1px solid #3356ff;
+      box-shadow: 0 10px 25px rgba(51,86,255,0.3);
+    }
+
+    .info-box h3 {
+      margin-bottom: 10px;
+      border-bottom: 2px solid #3356ff;
+      display: inline-block;
+      padding-bottom: 4px;
+      color: #7aa0ff;
+    }
+
+    /* === FORMULARIO Y GRÁFICO === */
+    .chart-section {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .chart-section h3 {
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      color: #9bb3ff;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    input, button, select {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-weight: 600;
+    }
+
+    input, select {
+      background: #22252f;
+      color: #fff;
+    }
+
+    button {
+      background: #3356ff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #2642cc;
+      transform: scale(1.05);
+    }
+
+    /* === GRÁFICO MEJORADO === */
+    .chart-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 650px;
+      min-height: 350px; /* ✅ mantiene tamaño incluso vacío */
+      margin: 0 auto;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pesoChart {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+    #emptyMessage {
+      position: absolute;
+      color: #9bb3ff;
+      font-size: 1.2em;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* === MODAL DE RUTINA === */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 85%;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+      animation: zoomIn 0.4s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal button {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      background: #3356ff;
+      border: none;
+      color: #fff;
+      font-size: 1em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .modal button:hover {
+      background: #2642cc;
+    }
+  </style>
+</head>
+<body>
+  <a class="back" href="home.html">← Volver</a>
+
+  <div class="top-section">
+    <div class="profile-img">
+      <img src="alejandro.png" alt="Alejandro — AllGim">
+    </div>
+
+    <div class="profile-info">
+      <h2>🏋️‍♂️ Alejandro</h2>
+      <p>Edad: 27 años</p>
+      <p>Peso: 78 kg</p>
+      <p>Peso máximo levantado: <strong id="maxTotal">140 kg</strong></p>
+    </div>
+  </div>
+
+  <div class="box-container">
+    <div class="info-box" id="rutinaBox">
+      <h3>Rutina</h3>
+      <p>Push/Pull/Legs centrado en fuerza y técnica de competición.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Pesos Máximos</h3>
+      <p>Introduce tus marcas personales abajo 👇 y visualízalas.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Dieta</h3>
+      <p>Alta en proteínas, moderada en carbohidratos y grasas saludables.</p>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <h3>📊 Registrar y visualizar tus pesos máximos</h3>
+    <form id="pesoForm">
+      <select id="ejercicio">
+        <option value="Press banca">Press banca</option>
+        <option value="Sentadilla">Sentadilla</option>
+        <option value="Peso muerto">Peso muerto</option>
+        <option value="Press militar">Press militar</option>
+        <option value="Dominadas lastradas">Dominadas lastradas</option>
+      </select>
+      <input type="number" id="peso" placeholder="Peso (kg)" required min="1">
+      <button type="submit">Añadir</button>
+    </form>
+
+    <div class="chart-wrapper">
+      <canvas id="pesoChart"></canvas>
+      <div id="emptyMessage">Aún no hay datos registrados 💪</div>
+    </div>
+  </div>
+
+  <!-- 🏋️ Modal con la imagen de rutina -->
+  <div class="modal" id="modalRutina">
+    <img src="https://www.puregym.com/media/nvrfnxfy/training-splits-1.jpg?quality=80" alt="Rutina de entrenamiento">
+    <button id="cerrarModal">Cerrar</button>
+  </div>
+
+  <script>
+    // === Gráfico de Pesos ===
+    const ctx = document.getElementById('pesoChart').getContext('2d');
+    const pesoChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Peso Máximo (kg)',
+          data: [],
+          backgroundColor: ['#3356ff','#4a70ff','#627eff','#7a94ff','#9bb3ff']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } },
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Progresión de tus levantamientos',
+            color: '#ffffff',
+            font: { size: 16, family: 'Poppins' }
+          }
+        }
+      }
+    });
+
+    const form = document.getElementById('pesoForm');
+    const emptyMsg = document.getElementById('emptyMessage');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ejercicio = document.getElementById('ejercicio').value;
+      const peso = parseFloat(document.getElementById('peso').value);
+
+      const index = pesoChart.data.labels.indexOf(ejercicio);
+      if (index >= 0) {
+        pesoChart.data.datasets[0].data[index] = peso;
+      } else {
+        pesoChart.data.labels.push(ejercicio);
+        pesoChart.data.datasets[0].data.push(peso);
+      }
+      pesoChart.update();
+
+      const total = pesoChart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+      document.getElementById('maxTotal').textContent = `${total} kg`;
+
+      form.reset();
+
+      // Ocultar mensaje vacío
+      if (pesoChart.data.datasets[0].data.length > 0) {
+        emptyMsg.style.display = 'none';
+      }
+    });
+
+    // === Modal Rutina ===
+    const rutinaBox = document.getElementById('rutinaBox');
+    const modalRutina = document.getElementById('modalRutina');
+    const cerrarModal = document.getElementById('cerrarModal');
+
+    rutinaBox.addEventListener('click', () => {
+      modalRutina.style.display = 'flex';
+    });
+
+    cerrarModal.addEventListener('click', () => {
+      modalRutina.style.display = 'none';
+    });
+
+    modalRutina.addEventListener('click', (e) => {
+      if (e.target === modalRutina) {
+        modalRutina.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
