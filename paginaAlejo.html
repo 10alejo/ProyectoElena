@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alejandro — AllGim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* TODO EL ESTILO IGUAL AL SEGUNDO CÓDIGO — SIN CAMBIOS */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #10131a;
+      font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a.back {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 60;
+      background: rgba(17,17,18,0.92);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    a.back:hover { background: #3356ff; }
+
+    .top-section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(135deg, #1d2230, #2a2f42, #181c24);
+      background-size: 200% 200%;
+      animation: gradientMove 10s ease infinite;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: transform 0.4s ease;
+    }
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+    }
+
+    .profile-info {
+      margin-top: 25px;
+      background: rgba(255,255,255,0.05);
+      padding: 25px 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+    .profile-info:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-5px);
+    }
+
+    .profile-info h2 { font-size: 2em; }
+
+    .box-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 50px;
+      width: 90%;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    /* FORM + GRAFICO */
+    .chart-wrapper {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 650px;
+      margin: auto;
+      min-height: 350px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    #pesoChart { height: 300px !important; }
+
+    #emptyMessage {
+      position: absolute;
+      color: #9bb3ff;
+      font-size: 1.2em;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* TABLA DE REGISTROS */
+    #tablaRegistros table {
+      width: 90%;
+      margin: 25px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #tablaRegistros th, #tablaRegistros td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    #tablaRegistros tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .btnEliminar {
+      background: red;
+      border: none;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btnReset {
+      display: block;
+      margin: 20px auto;
+      background: #ff4444;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="home.html">← Volver</a>
+
+  <div class="top-section">
+    <div class="profile-img"><img src="alejandro.png"></div>
+
+    <div class="profile-info">
+      <h2>🏋️‍♂️ Alejandro</h2>
+      <p>Edad: 27 años</p>
+      <p>Peso: 78 kg</p>
+      <p>Peso máximo levantado (Total): <strong id="maxTotal">0 kg</strong></p>
+    </div>
+  </div>
+
+  <!-- CAJAS -->
+  <div class="box-container">
+    <div class="info-box" id="rutinaBox">
+      <h3>Rutina</h3>
+      <p>Push/Pull/Legs centrado en técnica de competición.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Pesos Máximos</h3>
+      <p>Introduce tus marcas personales abajo 👇</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Dieta</h3>
+      <p>Alta en proteínas y carbohidratos moderados.</p>
+    </div>
+  </div>
+
+  <!-- FORM Y GRAFICO -->
+  <div class="chart-section">
+    <h3>📊 Registrar y visualizar tus pesos máximos</h3>
+
+    <form id="pesoForm">
+      <select id="ejercicio">
+        <option value="Press banca">Press banca</option>
+        <option value="Sentadilla">Sentadilla</option>
+        <option value="Peso muerto">Peso muerto</option>
+        <option value="Press militar">Press militar</option>
+        <option value="Dominadas lastradas">Dominadas lastradas</option>
+      </select>
+
+      <input type="number" id="peso" placeholder="Peso (kg)" required min="1">
+
+      <button type="submit">Añadir</button>
+    </form>
+
+    <div class="chart-wrapper">
+      <canvas id="pesoChart"></canvas>
+      <div id="emptyMessage">Aún no hay datos registrados 💪</div>
+    </div>
+
+    <button class="btnReset" id="btnVaciar">Vaciar todos los registros</button>
+
+    <div id="tablaRegistros"></div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modalRutina">
+    <img src="https://www.puregym.com/media/nvrfnxfy/training-splits-1.jpg?quality=80">
+    <button id="cerrarModal">Cerrar</button>
+  </div>
+
+  <script>
+    /* === DATOS PERSISTENTES === */
+    let registros = JSON.parse(localStorage.getItem("alejandro_pesos")) || [];
+
+    /* === GRAFICO === */
+    const ctx = document.getElementById('pesoChart');
+    const pesoChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: registros.map(r => r.ejercicio),
+        datasets: [{
+          label: "Peso (kg)",
+          data: registros.map(r => r.peso),
+          backgroundColor: registros.map(() => '#3356ff')
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    const form = document.getElementById("pesoForm");
+    const emptyMsg = document.getElementById("emptyMessage");
+
+    /* === ACTUALIZAR TABLA === */
+    function actualizarTabla() {
+      const cont = document.getElementById("tablaRegistros");
+
+      if (registros.length === 0) {
+        cont.innerHTML = "";
+        emptyMsg.style.display = "block";
+        return;
+      }
+
+      emptyMsg.style.display = "none";
+
+      let html =
+        `<table>
+          <tr>
+            <th>Ejercicio</th>
+            <th>Peso (kg)</th>
+            <th>Acciones</th>
+          </tr>`;
+
+      registros.forEach((r, i) => {
+        html += `
+          <tr>
+            <td>${r.ejercicio}</td>
+            <td>${r.peso}</td>
+            <td>
+              <button class="btnEliminar" onclick="eliminar(${i})">X</button>
+            </td>
+          </tr>`;
+      });
+
+      html += "</table>";
+
+      cont.innerHTML = html;
+    }
+
+    /* === GUARDAR === */
+    function guardar() {
+      localStorage.setItem("alejandro_pesos", JSON.stringify(registros));
+      actualizarGrafico();
+      actualizarTabla();
+      actualizarTotal();
+    }
+
+    /* === TOTAL === */
+    function actualizarTotal() {
+      const total = registros
+        .filter(r => ["Press banca", "Sentadilla", "Peso muerto"].includes(r.ejercicio))
+        .reduce((a, b) => a + b.peso, 0);
+
+      document.getElementById("maxTotal").textContent = total + " kg";
+    }
+
+    /* === ACTUALIZAR GRAFICO === */
+    function actualizarGrafico() {
+      pesoChart.data.labels = registros.map(r => r.ejercicio);
+      pesoChart.data.datasets[0].data = registros.map(r => r.peso);
+      pesoChart.update();
+    }
+
+    /* === ELIMINAR === */
+    window.eliminar = function (i) {
+      registros.splice(i, 1);
+      guardar();
+    };
+
+    /* === AÑADIR === */
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const ejercicio = document.getElementById("ejercicio").value;
+      const peso = parseInt(document.getElementById("peso").value);
+
+      const existe = registros.find(r => r.ejercicio === ejercicio);
+
+      if (existe) {
+        existe.peso = peso;
+      } else {
+        registros.push({ ejercicio, peso });
+      }
+
+      guardar();
+      form.reset();
+    });
+
+    /* === VACIAR === */
+    document.getElementById("btnVaciar").addEventListener("click", () => {
+      registros = [];
+      guardar();
+    });
+
+    actualizarTabla();
+    actualizarTotal();
+
+    /* === MODAL === */
+    document.getElementById("rutinaBox").onclick = () =>
+      document.getElementById("modalRutina").style.display = "flex";
+
+    document.getElementById("cerrarModal").onclick = () =>
+      document.getElementById("modalRutina").style.display = "none";
+
+    document.getElementById("modalRutina").onclick = e => {
+      if (e.target.id === "modalRutina")
+        document.getElementById("modalRutina").style.display = "none";
+    };
+
+  </script>
+
+</body>
+</html>
