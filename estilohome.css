@@ -1,0 +1,454 @@
+body {
+    background: #181c24; /* Negro con un poco de luz */
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Quicksand', 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+.principal {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0;
+    padding-top: 40px; /* Espacio arriba */
+}
+
+/* Contenedor del botón de usuario */
+.user-button {
+  text-decoration: none;
+  margin-right: 25px; /* Espacio igual al que diste al menú */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Contenedor circular con el fondo de tus otros botones */
+.user-icon-css {
+    width: 56px;           /* Misma altura que tu .menu-icon para que se vean iguales */
+    height: 56px;
+    background: #111214;   /* El mismo color gris oscuro de tu h1 y menu-icon */
+    border-radius: 18px;   /* El mismo redondeado (curvatura) que tus otros elementos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    overflow: hidden;      /* Para que el "cuerpo" del icono no se salga del borde */
+}
+
+/* La cabeza del usuario */
+.user-head {
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    margin-bottom: 3px;
+    transition: 0.3s;
+}
+
+/* El cuerpo del usuario */
+.user-body {
+    width: 28px;
+    height: 14px;
+    background: #fff;
+    border-radius: 14px 14px 0 0;
+    transition: 0.3s;
+}
+
+/* Efecto hover: igual que el de tus enlaces de menú */
+.user-button:hover .user-icon-css {
+    background: #23242a;
+}
+
+.user-button:hover .user-head,
+.user-button:hover .user-body {
+    background: #ffd700; /* El color dorado que usas en el hover del menú */
+}
+
+.principal h1 {
+    background: #111214; /* Más negro y opaco */
+    color: #fff;
+    font-family: 'Quicksand', 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-size: 3rem;
+    border-radius: 18px;
+    padding: 24px 48px;
+    margin: 0;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    font-weight: 700;
+}
+
+ohome.css */
+.menu-bar {
+    position: fixed;
+    top: 32px;
+    right: 48px;
+    z-index: 100;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    gap: 8px;
+    background: #111214;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    padding: 8px;
+    border: none;
+}
+
+.menu-icon span {
+    display: block;
+    height: 6px;
+    width: 32px;
+    background: #fff;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-options {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100px; /* bajado más (antes 70px) */
+    right: 0;
+    background: #111214;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    gap: 12px;
+    padding: 18px 0;
+    min-width: 220px;
+    list-style: none;
+}
+
+#menu-toggle:checked ~ .menu-options {
+    display: flex;
+}
+
+.menu-options li {
+    list-style: none;
+    margin: 0;
+}
+
+.menu-options a {
+    background: transparent;
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    padding: 14px 32px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    display: block;
+    min-width: 180px;
+    text-align: right;
+}
+
+.menu-options a:hover {
+    background: #23242a;
+    color: #ffd700;
+}
+.header-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 40px 48px 0 48px;
+    box-sizing: border-box;
+}
+
+.principal {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.menu-bar {
+    position: static;
+    top: unset;
+    right: unset;
+    z-index: 100;
+}
+
+.photo-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0 48px; /* subido para alinear la parte de abajo con el rectángulo */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: min(1100px, 92%);
+    align-items: end; /* alinea las tarjetas por la parte inferior */
+}
+
+.photo-rect {
+    background: #111214; /* mismo fondo que h1 */
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+}
+
+.photo-rect img {
+    display: block;
+    width: 100%;
+    height: 220px; /* altura fija para consistencia; ajusta si quieres */
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.25s ease;
+}
+
+/* pequeño zoom al pasar por encima (sobre la imagen) */
+.photo-rect:hover img {
+    transform: scale(1.06);
+}
+
+/* nombre debajo de la foto */
+.photo-name {
+    margin: 10px 0 0;
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+}
+.photo-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0 48px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.photo-grid {
+    display: flex;
+    gap: 24px;
+    width: min(1400px, 96%); /* ocupa casi todo el ancho */
+    margin: 0 auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* 4 en una sola línea */
+}
+
+/* tarjetas más anchas y alineadas en una fila */
+.photo-card {
+    flex: 1 1 0;       /* repartir el espacio entre 4 items */
+    max-width: calc((100% - 3 * 24px) / 4); /* garantiza 4 columnas iguales con gap */
+    background: #111214;
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.30);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transform-origin: center top;
+}
+
+/* nombre arriba en su propio recuadro, letra grande */
+.photo-name {
+    width: calc(100% - 28px);
+    background: #0d0f11;
+    color: #fff;
+    text-align: center;
+    padding: 14px 10px;
+    border-radius: 12px;
+    font-family: 'Quicksand', 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    transition: transform 0.25s ease;
+}
+
+/* imagen más "alargada" visualmente ocupando todo el ancho del rectángulo */
+.photo-img-wrapper {
+    width: calc(100% - 28px);
+    height: 280px; /* ajusta esta altura para hacerlas más o menos altas */
+    background: #0b0c0d;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* no cortar imágenes, centradas y contenidas */
+.photo-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* no recorta */
+    transition: transform 0.25s ease;
+}
+
+/* hover conjunto: al pasar por la tarjeta, nombre e imagen se escalan */
+.photo-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+
+.photo-card:hover .photo-img-wrapper img,
+.photo-card:hover .photo-name {
+    transform: scale(1.03);
+}
+
+/* responsivo: en pantallas pequeñas se apilan */
+@media (max-width: 900px) {
+    .photo-grid {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+    .photo-card {
+        max-width: 48%;
+        flex-basis: 48%;
+    }
+    .photo-img-wrapper { height: 220px; }
+}
+@media (max-width: 480px) {
+    .photo-card { max-width: 100%; flex-basis: 100%; }
+    .photo-img-wrapper { height: 200px; }
+}
+
+/* Hacer las imágenes clicables (envolturas en HTML) */
+.photo-link { display: block; width: 100%; text-decoration: none; }
+
+/* modales para ampliar imágenes (CSS-only con :target) */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8,10,12,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.modal img {
+    max-width: 96%;
+    max-height: 86vh;
+    border-radius: 12px;
+    box-shadow: 0 12px 50px rgba(0,0,0,0.6);
+    transition: transform 0.25s ease;
+}
+
+.modal:target {
+    display: flex;
+    animation: modalIn 180ms ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 28px;
+    right: 36px;
+    color: #fff;
+    font-size: 32px;
+    text-decoration: none;
+    line-height: 1;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+/* footer */
+.site-footer {
+    margin-top: 48px;
+    background: linear-gradient(180deg, rgba(17,17,18,0.95), rgba(10,10,11,0.95));
+    color: #dfe6ee;
+    padding: 28px 20px 12px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 -6px 30px rgba(0,0,0,0.3);
+}
+
+.footer-inner {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-company h3 {
+    margin: 0 0 6px;
+    color: #fff;
+    font-family: 'Quicksand', 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+
+.footer-company p { margin: 0; opacity: 0.85; }
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links a {
+    color: #dfe6ee;
+    text-decoration: none;
+    opacity: 0.92;
+    transition: color 0.15s;
+}
+
+.footer-links a:hover { color: #ffd700; }
+
+.footer-contact p { margin: 2px 0; opacity: 0.9; }
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+/* mantener hover conjunto: si la tarjeta se escala, modal no afecta.
+   Al pasar por foto o nombre se agrandan ambos (ya definidos),
+   mantener coherencia con modal: al abrir modal la imagen grande aparece. */
+
+/* ajustes responsivos */
+@media (max-width: 900px) {
+    .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+    .photo-card { max-width: 94%; }
+}
+
+@media (max-width: 480px) {
+    .modal-close { right: 18px; top: 18px; font-size: 28px; }
+    .modal img { max-height: 78vh; }
+}
