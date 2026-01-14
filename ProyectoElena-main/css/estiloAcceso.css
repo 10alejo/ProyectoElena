@@ -1,0 +1,28 @@
+/* Centra todo el contenido en la página */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    min-height: 100vh; /* Ocupa todo el alto de la pantalla */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.acceso-title {
+    margin-bottom: 20px;
+}
+
+.container-acceso {
+    text-align: center; /* Centra el texto y botones dentro del div */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px; /* Ancho fijo para que parezca una tarjeta */
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
