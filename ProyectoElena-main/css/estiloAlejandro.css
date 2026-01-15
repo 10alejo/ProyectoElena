@@ -1,0 +1,140 @@
+html, body {
+      height: 100%;
+      margin: 0;
+      background: #10131a;
+      font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a.back {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 60;
+      background: rgba(17,17,18,0.92);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    a.back:hover { background: #3356ff; }
+
+    .top-section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(135deg, #1d2230, #2a2f42, #181c24);
+      background-size: 200% 200%;
+      animation: gradientMove 10s ease infinite;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: transform 0.4s ease;
+    }
+    .profile-img:hover { transform: scale(1.05); }
+    .profile-img img { width: 100%; height: 100%; object-fit: contain; object-position: top center; }
+
+    .profile-info {
+      margin-top: 25px;
+      background: rgba(255,255,255,0.05);
+      padding: 25px 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+    .profile-info:hover { background: rgba(255,255,255,0.08); transform: translateY(-5px); }
+    .profile-info h2 { margin-top: 0; font-size: 2em; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+    .profile-info p { margin: 6px 0; font-size: 1.05em; }
+
+    .box-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 50px;
+      width: 90%;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+      transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .info-box:hover { transform: translateY(-6px); border: 1px solid #3356ff; box-shadow: 0 10px 25px rgba(51,86,255,0.3); }
+    .info-box h3 { margin-bottom: 10px; border-bottom: 2px solid #3356ff; display: inline-block; padding-bottom: 4px; color: #7aa0ff; }
+
+    .chart-section { margin-top: 60px; text-align: center; }
+    .chart-section h3 { margin-bottom: 15px; font-size: 1.3em; color: #9bb3ff; }
+    form { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+    input, button, select { padding: 10px 14px; border: none; border-radius: 10px; font-family: inherit; font-weight: 600; }
+    input, select { background: #22252f; color: #fff; }
+    button { background: #3356ff; color: white; cursor: pointer; transition: background 0.3s, transform 0.2s; }
+    button:hover { background: #2642cc; transform: scale(1.05); }
+
+    .chart-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 650px;
+      min-height: 350px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #pesoChart { width: 100% !important; height: 300px !important; }
+    #emptyMessage { position: absolute; color: #9bb3ff; font-size: 1.2em; font-weight: 600; text-align: center; }
+
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:2000; animation: fadeIn 0.4s ease; padding:20px; box-sizing:border-box; }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .modal table {
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      font-size: 1.05em;
+      color: #fff;
+      margin: 0 auto;
+    }
+    .modal th, .modal td { padding: 12px 15px; text-align:center; }
+    .modal th { background: rgba(51,86,255,0.4); font-family: "Poppins"; font-size: 1.1em; letter-spacing: 0.5px; }
+    .modal tr:nth-child(even) td { background: rgba(255,255,255,0.05); }
+    .modal tr:nth-child(odd) td { background: rgba(255,255,255,0.1); }
+    .modal button { position:absolute; top:25px; right:35px; background:#3356ff; border:none; color:#fff; font-size:1em; padding:10px 18px; border-radius:10px; cursor:pointer; transition: background 0.3s; }
+    .modal button:hover { background:#2642cc; }

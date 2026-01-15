@@ -1,0 +1,152 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #10131a;
+  font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 80px 20px 40px;
+  background: linear-gradient(135deg, #1d2230, #2a2f42, #181c24);
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: #fff;
+}
+
+header p {
+  margin: 10px 0 0;
+  color: #9bb3ff;
+  font-weight: 500;
+}
+
+#backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #302a39;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  z-index: 10;
+}
+
+#backButton:hover {
+  background: #2642cc;
+  transform: scale(1.05);
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.title-card {
+  text-align: center;
+  color: #7aa0ff;
+  margin-bottom: 20px;
+}
+
+.form-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  margin-bottom: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #22252f;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  box-sizing: border-box; 
+}
+
+button.submit-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #3356ff;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 10px;
+}
+
+button.submit-button:hover {
+  background: #2642cc;
+  transform: scale(1.02);
+}
+
+.opinions-title {
+  color: #9bb3ff;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.opinions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding-bottom: 50px;
+}
+
+.opinions-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+  border-top: 3px solid #3356ff;
+}
+
+.opinions-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.opinions-card h3 {
+  margin: 0 0 10px 0;
+  color: #7aa0ff;
+  font-size: 1.1em;
+  border-bottom: 1px solid rgba(122, 160, 255, 0.3);
+  padding-bottom: 5px;
+}
+
+.opinions-card p {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
