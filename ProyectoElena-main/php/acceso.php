@@ -1,0 +1,141 @@
+<?php
+
+require_once "accesoadatos.php";
+session_start();
+
+$db = new AccesoDatos($conexion);
+
+$mensaje_login = "";
+$mensaje_registro = "";
+
+// 1. CONTROL DE LA VISTA (¿Qué caja mostramos?)
+// Por defecto mostramos login
+$vista_actual = 'login'; 
+
+// Si venimos del enlace "Regístrate aquí" (URL trae ?v=registro)
+if (isset($_GET['v']) && $_GET['v'] == 'registro') {
+
+    $vista_actual = 'registro';
+}
+
+// ---------------------------------------------------------
+// LÓGICA DE REGISTRO
+// ---------------------------------------------------------
+if (isset($_POST['accion']) && $_POST['accion'] == 'registrar') {
+
+    $nombre = $_POST['nombre_reg'];
+    $password = $_POST['password_reg'];
+
+    if (strlen($_POST['password_reg']) < 8) {
+
+        $mensaje_registro = "<p style='color:red;'>La contraseña debe de contener almenos 8 carácteres.</p>";
+        $vista_actual = 'registro';
+    }
+
+    else {
+
+    $resultado = $db->registrarUsuario($nombre, $password);
+
+    if ($resultado) {
+
+        $mensaje_login = "<p style='color:green;'>¡Registro exitoso! Por favor, inicia sesión.</p>";
+        $vista_actual = 'login'; // Forzamos ir al login tras éxito
+    } 
+    
+    else {
+
+        $mensaje_registro = "<p style='color:red;'>El nombre ya existe.</p>";
+        $vista_actual = 'registro'; // Mantenemos registro si hay error
+    }
+}
+}
+
+// ---------------------------------------------------------
+// LÓGICA DE LOGIN
+// ---------------------------------------------------------
+if (isset($_POST['accion']) && $_POST['accion'] == 'login') {
+
+    $nombre = $_POST['nombre_login'];
+    $password = $_POST['password_login'];
+
+    $usuarioDatos = $db->obtenerUsuarioPorNombre($nombre);
+
+    if ($usuarioDatos && password_verify($password, $usuarioDatos['password'])) {
+
+        $_SESSION['usuario'] = $usuarioDatos['nombre'];
+        
+        header('Location: home.php'); 
+        exit();
+    } 
+    
+    else {
+
+        $mensaje_login = "<p style='color:black;'>Usuario o contraseña incorrectos.</p>";
+        $vista_actual = 'login'; // Mantenemos login si hay error
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - AllGim</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <link rel="stylesheet" href="../css/estiloAcceso.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="form-box <?= ($vista_actual == 'login') ? 'active' : '' ?>">
+            <img src="../images/logo.png" class="imagen-logo">
+            <h2>Inicio de Sesión</h2>
+            <p>Accede a tu cuenta</p>
+
+            <?= $mensaje_login ?>
+
+            <form method="POST">
+                <input type="hidden" name="accion" value="login">
+                <input type="text" name="nombre_login" placeholder="Nombre de Usuario"  autofocus required>
+                <input type="password" name="password_login" placeholder="Contraseña" autofocus required>
+
+                <button type="submit">Acceder</button>
+
+                <p style="text-align: center; margin-top: 15px;">
+                    ¿Aún no tienes cuenta?
+                    <a href="acceso.php?v=registro" style="color: #090909; font-weight: bold;">Regístrate aquí</a>
+                </p>
+            </form>
+        </div>
+
+        <div class="form-box <?= ($vista_actual == 'registro') ? 'active' : '' ?>">
+            <img src="../images/logo.png" class="imagen-logo">
+            <h2>Registro</h2>
+            <p>Crea tu cuenta con nosotros</p>
+
+            <?= $mensaje_registro ?>
+
+            <form method="POST">
+                <input type="hidden" name="accion" value="registrar">
+                <input type="text" name="nombre_reg" placeholder="Nombre" required>
+                <input type="password" name="password_reg" placeholder="Contraseña (mínimo 8 caracteres)" required>
+
+                <button type="submit">Registrarse</button>
+
+                <p style="text-align: center; margin-top: 15px;">
+                    ¿Ya tienes cuenta?
+                    <a href="acceso.php?v=login" style="color: #090909; font-weight: bold;">Inicia sesión</a>
+                </p>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
