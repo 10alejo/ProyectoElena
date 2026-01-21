@@ -1,0 +1,92 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #10131a;
+  font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+header {
+  text-align: center;
+  padding: 80px 20px 40px;
+  background: linear-gradient(135deg, #1d2230, #2a2f42, #181c24);
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  position: relative;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: #fff;
+}
+header p {
+  margin: 10px 0 0;
+  color: #9bb3ff;
+  font-weight: 500;
+}
+#backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #302a39;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+#backButton:hover {
+  background: #2642cc;
+  transform: scale(1.05);
+}
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+.rankings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.rank-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.rank-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(51,86,255,0.3);
+}
+.rank-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3356ff;
+  display: inline-block;
+  padding-bottom: 4px;
+  color: #7aa0ff;
+}
+.rank-card ol {
+  padding-left: 20px;
+  margin: 0;
+}
+.rank-card li {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #fff;
+}
+h2.rankings-title {
+  color: #9bb3ff;
+  margin-bottom: 20px;
+  text-align: center;
+}
