@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones - AllGim</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estiloOpiniones.css">
+</head>
+
+<body>
+
+    <header>
+
+        <button id ="backButton">&#8592; Atrás</button> 
+        <h1>Opiniones sobre AllGim</h1>
+        <p>Comparte tu opinión acerca de nosotros</p>
+
+    </header>
+
+<div class="container">
+  <div class="form-card">
+    <h2 class="title-card">Envía tu opinión</h2>
+    <form id="opinionForm">
+      <input type="text" id="name" placeholder="Nombre" required>
+      <textarea id="message" rows="5" placeholder="Escribe tu opinión..." required></textarea>
+      <button type="submit" class="submit-button">Enviar Opinión</button>
+    </form>
+  </div>
+
+  <h2 class="opinions-title">Opiniones recientes</h2>
+  <div class="opinions" id="opinionsContainer">
+  </div>
+</div>
+
+<script src="../js/opiniones.js"></script>
+    
+</body>
+</html>
