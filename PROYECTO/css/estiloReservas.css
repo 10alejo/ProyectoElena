@@ -1,0 +1,382 @@
+/* --- 1. NAVEGACIÓN DE FECHAS (TU ESTILO MANTENIDO) --- */
+.date-navigation-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.date-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #1f1f1f;
+    padding: 15px 40px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    min-width: 500px;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #ff9900;
+    font-size: 1.8rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 153, 0, 0.1);
+}
+
+.nav-btn:hover {
+    background: #ff9900;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.6);
+}
+
+.nav-btn.disabled {
+    color: #444;
+    background: transparent;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* --- 2. CONTENEDOR Y GRID DE ACTIVIDADES (NUEVO) --- */
+.reservas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
+.grid-actividades {
+    display: grid;
+    /* Esto organiza las tarjetas en columnas automáticas */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* --- 3. TARJETA DE ACTIVIDAD --- */
+.card-actividad {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.card-actividad:hover {
+    border-color: #ff9900;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.card-actividad.deshabilitada {
+    opacity: 0.6;
+    filter: grayscale(0.8);
+}
+
+/* Cabecera de la tarjeta */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.icono-actividad {
+    font-size: 2.2rem;
+    background: #222;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.info-top h3 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.info-top .hora {
+    color: #ff9900;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+    flex-grow: 1;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.monitor { margin-bottom: 15px; }
+
+.intensidad-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Badges de intensidad según el PHP */
+.badge-intensidad {
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.baja { background: #28a745; color: white; }
+.media { background: #ffc107; color: black; }
+.alta { background: #fd7e14; color: white; }
+.muy-alta { background: #dc3545; color: white; }
+
+/* Barra de progreso de plazas */
+.barra-progreso {
+    background: #333;
+    height: 8px;
+    border-radius: 10px;
+    margin: 8px 0;
+    overflow: hidden;
+}
+
+.progreso-relleno {
+    background: linear-gradient(90deg, #ff9900, #ffcc00);
+    height: 100%;
+}
+
+/* --- 4. BOTONES --- */
+.btn-reservar {
+    width: 100%;
+    background: #ff9900;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-reservar:hover:not(.disabled) {
+    background: #fff;
+}
+
+.btn-reservar.disabled {
+    background: #444;
+    color: #777;
+    cursor: not-allowed;
+}
+
+/* Otros estilos de tu navegación central */
+.current-date-group { display: flex; flex-direction: column; align-items: center; }
+.titulo-fecha { color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 5px; }
+.form-calendario { position: relative; }
+.form-calendario input[type="date"] { position: absolute; opacity: 0; cursor: pointer; width: 100%; }
+.calendar-icon { font-size: 0.85rem; color: #aaa; border-bottom: 1px dashed #555; }
+
+:root { color-scheme: dark; }
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #111;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo-icon {
+  width: 85px;
+  height: auto;
+}
+
+.header-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ESTILOS DEL USUARIO Y DROPDOWN (Integrados para el PHP) */
+.user-dropdown {
+  position: relative;
+  display: flex; /* Cambiado de inline-block a flex para alinear el avatar */
+  align-items: center;
+  gap: 12px; /* Espacio entre avatar y texto */
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #ff6b00; /* Naranja corporativo */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  flex-shrink: 0; /* Evita que el círculo se aplaste si el nombre es largo */
+}
+
+.arrow-down {
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: #ff6b00;
+}
+
+/* Espaciado para que el icono no toque el texto */
+.dropdown-content a img {
+    margin-left: 15px;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.user-link-icon {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 1200;
+  position: relative;
+}
+
+.menu-button span {
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#menu-toggle:checked+.menu-button span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked+.menu-button span:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle:checked+.menu-button span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 1050;
+}
+
+#menu-toggle:checked~.menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+#menu-toggle:checked~.sidebar {
+  right: 0;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 250px;
+  height: 100vh;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1100;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar a {
+  padding: 20px 30px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px solid #222;
+}
+
+.sidebar a:hover {
+  background: #4b2ccf;
+}
+

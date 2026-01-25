@@ -1,0 +1,115 @@
+body {
+    background-color: black;
+    padding-top: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* El bloque de la tarjeta (Gris) */
+.payment-card {
+    background: #e3e3e3;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+/* Variables de color */
+:root {
+    --color-naranja: #fd7e14;
+    --color-naranja-dark: #d66408;
+    --color-naranja-light: #fff3e6;
+}
+
+/* Columna Izquierda (Naranja) */
+.left-side {
+    background-color: var(--color-naranja);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Columna Derecha (Gris) */
+.right-side {
+    padding: 40px;
+    background-color: #e3e3e3;
+}
+
+/* Imágenes pequeñas */
+.card-selector img {
+    width: 60px;
+    height: auto;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    margin: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+    padding: 4px;
+}
+
+/* Hover en tarjetas */
+.card-selector img:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-naranja);
+}
+
+/* Tarjeta ACTIVA */
+.card-selector img.active {
+    border-color: var(--color-naranja);
+    background-color: var(--color-naranja-light);
+    box-shadow: 0 0 0 2px rgba(253, 126, 20, 0.3);
+}
+
+/* Imagen grande izquierda */
+.current-card-img {
+    max-width: 150px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Textos oscuros */
+h3,
+label {
+    color: #333;
+}
+
+/* --- FORZAR NARANJAS (Overrides) --- */
+.text-primary {
+    color: var(--color-naranja) !important;
+}
+
+.btn-primary {
+    background-color: var(--color-naranja) !important;
+    border-color: var(--color-naranja) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: var(--color-naranja-dark) !important;
+    border-color: var(--color-naranja-dark) !important;
+    box-shadow: 0 0 10px rgba(253, 126, 20, 0.5) !important;
+}
+
+/* Inputs Blancos (para que resalten sobre el gris) */
+.form-control {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: var(--color-naranja) !important;
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25) !important;
+}
+
+.input-group-text {
+    background-color: #d1d1d1;
+    border: 1px solid #ced4da;
+}
