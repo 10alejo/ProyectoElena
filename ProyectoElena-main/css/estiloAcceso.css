@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to top, #0e0d0d, #1e1d1d);
+    color: #333;
+}
+
+.container {
+    margin: 0 15px;
+}
+
+/* Esta es la clase clave que conecta con tu HTML */
+.form-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: linear-gradient(to top, #df8321, #ff6b00);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    /* Oculto por defecto */
+}
+
+/* Esta clase hace visible el formulario */
+.form-box.active {
+    display: block;
+}
+
+h2 {
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    background: #eee;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* ... (resto de estilos de select igual que antes) ... */
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #020205;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: 0.5s;
+}
+
+button:active{
+
+    transform: scale(0.95);
+}
+
+button:hover {
+    background: #000000;
+}
+
+p {
+    font-size: 14.5px;
+    text-align: center;
+    margin-bottom: 20px;
+    /* Aumentado un poco para separar del input */
+}
+
+/* Estilo para el focus (borde verde) */
+input:focus,
+select:focus {
+    outline: 2px solid #000000;
+    outline-offset: 0;
+}
+
+/* Clase auxiliar para ocultar lo que no toque ver */
+    .oculto {
+        display: none;
+    }
+
+    .switch-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .switch-link a {
+        color: #70b935;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .switch-link a:hover {
+        text-decoration: underline;
+    }
+
+    .imagen-logo {
+
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin: 0 auto;
+    }
