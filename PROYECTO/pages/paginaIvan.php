@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Iván — AllGim</title>
+  <link rel="icon" href="../php/mostrar_foto.php?nombre=logo" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../css/estiloIvan.css">
+</head>
+
+<body>
+  <a class="back" href="../php/home.php">← Volver</a>
+  <div class="top-section">
+    <div class="profile-img">
+      <img src="../php/mostrar_foto.php?nombre=ivan" alt="Ivan - AllGim">
+    </div>
+    <div class="profile-info">
+      <h2>💪 Iván</h2>
+      <p>Edad: 19 años</p>
+      <p>Peso: 68 kg</p>
+    </div>
+  </div>
+
+  <div class="box-container">
+    <div class="info-box" id="rutinaBox">
+      <h3>Rutina</h3>
+      <p>Judo + Push/Pull/Legs</p>
+    </div>
+
+    <div class="info-box" id="pesosBox">
+      <h3>Pesos Máximos</h3>
+      <p>
+        <?php echo $es_dueño ? "Introduce tus marcas personales abajo 👇" : "Visualiza las marcas personales de Iván."; ?>
+      </p>
+    </div>
+
+    <div class="info-box">
+      <h3>Dieta</h3>
+      <p>Alta en proteínas, moderada en carbohidratos y grasas saludables.</p>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <h3>📊 <?php echo $es_dueño ? "Registrar y visualizar tus pesos máximos" : "Pesos máximos de Iván"; ?></h3>
+    
+    <?php if ($es_dueño): ?>
+      <form id="pesoForm" action="../php/guardar_peso.php" method="post">
+        <select id="ejercicio" name="ejercicio">
+          <option value="pressbanca">Press banca</option>
+          <option value="sentadilla">Sentadilla</option>
+          <option value="pesomuerto">Peso muerto</option>
+          <option value="pressmilitar">Press militar</option>
+          <option value="dominadaslastradas">Dominadas lastradas</option>
+        </select>
+        <input type="number" id="peso" name="peso" placeholder="Peso (kg)" required min="1">
+        <button type="submit">Añadir</button>
+      </form>
+    <?php else: ?>
+      <p style="text-align:center; color:#9bb3ff; padding: 10px;">
+        (Modo lectura: Estás viendo el progreso de Iván)
+      </p>
+    <?php endif; ?>
+
+    <div class="chart-wrapper">
+      <canvas id="pesoChart"></canvas>
+      <div id="emptyMessage">Aún no hay datos registrados 💪</div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalRutina">
+    <div class="modal-content">
+        <table>
+          <thead>
+            <tr><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Judo</td>
+              <td>Pecho - Hombro - Tríceps</td>
+              <td>Judo</td>
+              <td>Espalda - Bíceps</td>
+              <td>Pierna completa</td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="cerrarModalRutina">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modalPesos">
+    <div class="modal-content">
+      <h2 style="color:#9bb3ff; text-align:center;">📊 Pesos Máximos</h2>
+      <table id="tablaPesos">
+        <thead>
+          <tr>
+            <th>Ejercicio</th>
+            <th>Peso (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" style="text-align: center; padding: 12px;">Aún no hay datos registrados</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="cerrarModalPesos">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="../js/ivan.js"></script>
+
+</body>
+</html>
