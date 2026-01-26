@@ -1,0 +1,81 @@
+/* CONTENEDOR PRINCIPAL */
+.container {
+    max-width: 1400px; /* Más ancho para que quepan las 3 tablas bien */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* TÍTULO CENTRADO */
+.rankings-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    color: #ffffff;
+    text-align: center; /* Centrado absoluto */
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+/* REJILLA PARALELA (3 TABLAS) */
+.rankings {
+    display: grid;
+    /* Forzamos 3 columnas iguales */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
+    align-items: start;
+}
+
+/* RECUADRO OSCURO (ENCUADRADO) */
+.ranking-card {
+    background-color: #111111 !important; /* Negro del header */
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid #222;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* TÍTULO DEL EJERCICIO CENTRADO DENTRO DE LA TABLA */
+.ranking-card h3 {
+    color: #FF6600 !important; /* Naranja corporativo */
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #222;
+    font-size: 1.3rem;
+}
+
+/* FILAS DE LOS ATLETAS */
+.rank-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+/* COLORES DE NOMBRE Y PESO */
+.rank-name {
+    color: #ffffff !important; /* Nombre en blanco */
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.rank-val {
+    color: #FF6600 !important; /* Peso en naranja resaltado */
+    font-weight: 900;
+    font-size: 1.05rem;
+}
+
+/* RESPONSIVO: Si la pantalla es pequeña, se ponen una debajo de otra */
+@media (max-width: 1000px) {
+    .rankings {
+        grid-template-columns: 1fr;
+    }
+    .rankings-title {
+        font-size: 2rem;
+    }
+}
