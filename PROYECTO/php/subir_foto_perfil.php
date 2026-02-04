@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['foto']) && $_FILES['
         $comprobarImagen = $conexion->prepare("SELECT id FROM imagenes_usuarios WHERE usuario_nombre = :n");
         $comprobarImagen->execute(['n' => $nombre]);
 
-        if ($check->fetch()) {
+        if ($comprobarImagen->fetch()) {
 
             $sql = "UPDATE imagenes_usuarios SET datos_imagen = :d, tipo_imagen = :t WHERE usuario_nombre = :n";
         } 
@@ -46,5 +46,6 @@ else {
 
     die("No se seleccionó ninguna imagen o hubo un error en la subida.");
 }
+
 
 ?>
